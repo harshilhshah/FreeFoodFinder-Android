@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "232623978084",
+    "firebase_url": "https://crackling-heat-4631.firebaseio.com",
+    "project_id": "crackling-heat-4631",
+    "storage_bucket": "crackling-heat-4631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232623978084:android:0c20b3c17ebc85f0",
+        "android_client_info": {
+          "package_name": "com.harshilhshah.rufree.rufree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232623978084-p1ag1c06h5dv65jkuu0p6ncfpemhqpp7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.harshilhshah.rufree.rufree",
+            "certificate_hash": "0402C6C81A4D82FE2AC9E9CC44236FA0376A840F"
+          }
+        },
+        {
+          "client_id": "232623978084-k2dnj3moosh739nqprc3sdboqjlp93s4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr0IY1B3nJRAlqsMj4yF0zQvd9zveyYug"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232623978084-k2dnj3moosh739nqprc3sdboqjlp93s4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

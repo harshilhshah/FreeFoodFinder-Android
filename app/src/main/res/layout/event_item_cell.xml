@@ -4,48 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-
+    android:paddingBottom="16dp"
+    android:background="#f0f0f0"
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image"
+        android:contentDescription="@string/displays_an_image_to_better_showcase_the_event" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
         android:id="@+id/calendar"
-        android:gravity="center_vertical"
+        android:background="@drawable/background_with_shadow"
         >
         <TextView
             android:id="@+id/date"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/circular"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:height="56dp"
+            android:layout_width="match_parent"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="#000000"
             android:textStyle="bold"
-            android:layout_centerVertical="true"/>
+            android:layout_height="28dp"
+            android:textSize="16sp"
+            android:background="#ffffff"/>
         <TextView
             android:id="@+id/event_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:typeface="serif"
-            android:height="56dp"
-            android:gravity="center_vertical"
-            android:layout_alignParentTop="true"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:layout_toRightOf="@+id/date"
-            android:layout_toEndOf="@+id/date" />
+            android:paddingBottom="8dp"
+            android:layout_below="@+id/date"
+            android:background="#ffffff"/>
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/event_item_selected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"/>
 
 </LinearLayout>

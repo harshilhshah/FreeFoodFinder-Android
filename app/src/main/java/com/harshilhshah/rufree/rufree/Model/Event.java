@@ -1,22 +1,29 @@
 package com.harshilhshah.rufree.rufree.Model;
 
-import java.io.IOException;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.InputStream;
-import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
  * Created by harshilhshah on 9/25/15.
  */
-public class Event {
+public class Event implements Parcelable{
 
     private static final long serialVersionUID = 1L;
+    private DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 
     public String name;
+    public String id;
 
-    private GregorianCalendar startDate;
-    private GregorianCalendar endDate;
+    private String startTime;
+    private String endTime;
+    private GregorianCalendar startGC = (GregorianCalendar) GregorianCalendar.getInstance();
+    private GregorianCalendar endGC = (GregorianCalendar) GregorianCalendar.getInstance();;
 
     private String description;
     private String image_url;
@@ -26,14 +33,43 @@ public class Event {
     private InputStream image;
 
 
-    public Event(String name, String description, GregorianCalendar start, GregorianCalendar end, Location loc)
+    public Event( String name, String description, GregorianCalendar start, GregorianCalendar end, Location loc)
     {
         this.name = name;
-        this.startDate = start;
-        this.endDate = end;
+        this.startGC = start;
+        this.endGC = end;
         this.description = description;
         this.campus_loc = loc;
     }
+
+    protected Event(Parcel in) {
+        name = in.readString();
+        id = in.readString();
+        description = in.readString();
+        image_url = in.readString();
+        category = in.readString();
+        organization = in.readString();
+        startTime = in.readString();
+        endTime = in.readString();
+        try {
+            startGC.setTime(formatter.parse(startTime));
+            endGC.setTime(formatter.parse(endTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
     public InputStream getImage() {
         return image;
@@ -43,13 +79,14 @@ public class Event {
         this.image = image;
     }
 
-    public Event(String name, String description, GregorianCalendar start, GregorianCalendar end, Location loc, String url)
-    {
+    public Event(String name, String description, String start, String end, Location loc, String url) throws ParseException {
         this.name = name;
-        this.startDate = start;
-        this.endDate = end;
         this.description = description;
         this.campus_loc = loc;
+        this.startTime = start;
+        this.endTime = end;
+        startGC.setTime(formatter.parse(start));
+        endGC.setTime(formatter.parse(end));
         setImage_url(url);
     }
 
@@ -61,15 +98,8 @@ public class Event {
         return image_url;
     }
 
-    public void setImage_url(String image_url) {
+    private void setImage_url(String image_url) {
         this.image_url = image_url;
-        try {
-            InputStream is = (InputStream) new URL(this.image_url).getContent();
-            setImage(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public Location getCampus_loc() {
@@ -100,20 +130,20 @@ public class Event {
         this.name = name;
     }
 
-    public GregorianCalendar getStartDate() {
-        return startDate;
+    public GregorianCalendar getStartGC() {
+        return startGC;
     }
 
-    public void setStartDate(GregorianCalendar startDate) {
-        this.startDate = startDate;
+    public void setStartGC(GregorianCalendar startGC) {
+        this.startGC = startGC;
     }
 
-    public GregorianCalendar getEndDate() {
-        return endDate;
+    public GregorianCalendar getEndGC() {
+        return endGC;
     }
 
-    public void setEndDate(GregorianCalendar endDate) {
-        this.endDate = endDate;
+    public void setEndGC(GregorianCalendar endGC) {
+        this.endGC = endGC;
     }
 
     public String getDescription() {
@@ -126,18 +156,18 @@ public class Event {
 
     public String getDateString(){
         SimpleDateFormat monthf = new SimpleDateFormat("MMM d");
-        return monthf.format(startDate.getTime()).toUpperCase() ;
+        return monthf.format(startGC.getTime()).toUpperCase() ;
     }
 
     public String getTimeString(){
         SimpleDateFormat timef = new SimpleDateFormat("MMM d");
-        if(timef.format(startDate.getTime()).equals(timef.format(endDate.getTime()))){
+        if(timef.format(startGC.getTime()).equals(timef.format(endGC.getTime()))){
             timef = new SimpleDateFormat("EEEE, MMM d 'from' h:mma");
-            String st = timef.format(startDate.getTime());
+            String st = timef.format(startGC.getTime());
             timef = new SimpleDateFormat("h:mma");
-            return st + " to " + timef.format(endDate.getTime());
+            return st + " to " + timef.format(endGC.getTime());
         }else{
-            return timef.format(startDate.getTime()) + "-" + timef.format(endDate.getTime());
+            return timef.format(startGC.getTime()) + "-" + timef.format(endGC.getTime());
         }
     }
 
@@ -152,9 +182,37 @@ public class Event {
         return resultString;
     }
 
+    @Override
+    public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Event)) {
+            return false;
+        }
+        Event e = (Event)o;
+        return e.getName().equals(this.getName()) && e.getDateString().equals(this.getDateString());
+    }
+
     public String getSmsString(){
         return "Hey! #RUFreeFood @ " + this.name + " on "
                 + this.getDateString() + ": " + this.description;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(id);
+        parcel.writeString(description);
+        parcel.writeString(image_url);
+        parcel.writeString(category);
+        parcel.writeString(organization);
+        parcel.writeString(startTime);
+        parcel.writeString(endTime);
+    }
 }

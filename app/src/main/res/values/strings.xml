@@ -5,4 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_events_display">EventsDisplay</string>
     <string name="facebook_app_id">140671119617216</string>
+    <string name="search">Search</string>
+    <string name="user">User</string>
+    <string name="displays_an_image_to_better_showcase_the_event">Displays an image to better showcase the event</string>
+    <string name="title_activity_event_display">EventDisplayActivity</string>
 </resources>
