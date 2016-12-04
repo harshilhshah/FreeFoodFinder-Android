@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RUFREE.iml" filepath="$PROJECT_DIR$/RUFREE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FreeFoodFinder-Android.iml" filepath="$PROJECT_DIR$/FreeFoodFinder-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

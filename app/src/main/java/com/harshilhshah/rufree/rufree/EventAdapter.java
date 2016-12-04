@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * Created by harshilhshah on 1/11/16.
  */
+
 public class EventAdapter extends BaseAdapter {
 
     private List<Event> events;
@@ -87,6 +88,7 @@ public class EventAdapter extends BaseAdapter {
         events.add(newEvent);
         Collections.sort(events, dc);
         notifyDataSetChanged();
+        // Kevin made this change!
     }
 
     private static class DateComparator implements Comparator<Event> {
