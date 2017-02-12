@@ -17,15 +17,12 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     private ImageView bmImage;
     private Drawable drawable;
+    private int width;
 
-    public DownloadImageTask(ImageView bmImage, Drawable d) {
+    public DownloadImageTask(ImageView bmImage, Drawable d, int width) {
         this.bmImage = bmImage;
         this.drawable = d;
-    }
-
-    private int getWidth(){
-        if(this.bmImage.getWidth() < 1) return 200;
-        return this.bmImage.getWidth();
+        this.width = width;
     }
 
     protected Bitmap doInBackground(String... urls) {
@@ -38,11 +35,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             }
-            int height = getWidth()/mIcon11.getWidth() * mIcon11.getHeight();
-            if (height < 480) {
-                height = 480;
-            }
-            mIcon11 = Bitmap.createScaledBitmap(mIcon11, getWidth(), height, true);
+            mIcon11 = Bitmap.createScaledBitmap(mIcon11, width, 480, true);
         } catch (Exception e) {
             e.printStackTrace();
         }

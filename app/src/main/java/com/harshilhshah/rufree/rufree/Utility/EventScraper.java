@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.harshilhshah.rufree.rufree.EventAdapter;
 import com.harshilhshah.rufree.rufree.Model.Event;
 import com.harshilhshah.rufree.rufree.Model.Location;
+import com.harshilhshah.rufree.rufree.R;
 
 import java.text.ParseException;
 import java.util.HashMap;
@@ -34,6 +35,21 @@ public class EventScraper {
         getEvents();
     }
 
+    public static int getRandomImage(Event e){
+        switch (e.getTags().split("#")[1].trim()){
+            case "food":
+                return R.drawable.pasta;
+            case "dessert":
+                return R.drawable.dessert;
+            case "snack":
+                return R.drawable.cookies;
+            default:
+                Log.d("klkl",e.getTags().split("#")[1]);
+                return R.drawable.lunch;
+        }
+    }
+
+
 
     private void getEvents() {
 
@@ -54,8 +70,9 @@ public class EventScraper {
                             }
 
                             Location loc = null;
+                            String tags = getTags(description);
 
-                            if (getTags(description).length() > 1) {
+                            if (tags.length() > 1) {
 
                                 if (event.get("place") != null) {
                                     HashMap place = (HashMap) event.get("place");
@@ -81,7 +98,7 @@ public class EventScraper {
                                     end_time = event.get("end_time").toString();
 
                                 try {
-                                    eventAdapter.addItem(new Event(title, description, start_time, end_time, loc, img_url));
+                                    eventAdapter.addItem(new Event(title, tags, description, start_time, end_time, loc, img_url));
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }

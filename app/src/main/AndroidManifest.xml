@@ -37,6 +37,10 @@
             android:name=".EventDisplayActivity"
             android:label="@string/title_activity_event_display"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CreateEventActivity"
+            android:label="@string/title_activity_create_event"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

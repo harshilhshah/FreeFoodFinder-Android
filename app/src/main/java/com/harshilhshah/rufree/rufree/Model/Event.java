@@ -25,6 +25,7 @@ public class Event implements Parcelable{
     private GregorianCalendar startGC = (GregorianCalendar) GregorianCalendar.getInstance();
     private GregorianCalendar endGC = (GregorianCalendar) GregorianCalendar.getInstance();;
 
+    private String tags;
     private String description;
     private String image_url;
     private Location campus_loc;
@@ -45,10 +46,13 @@ public class Event implements Parcelable{
     protected Event(Parcel in) {
         name = in.readString();
         id = in.readString();
+        tags = in.readString();
         description = in.readString();
         image_url = in.readString();
         category = in.readString();
         organization = in.readString();
+        String[] temp_location = in.readString().split(":");
+        campus_loc = new Location(temp_location[0],temp_location[1],temp_location[2]);
         startTime = in.readString();
         endTime = in.readString();
         try {
@@ -79,12 +83,13 @@ public class Event implements Parcelable{
         this.image = image;
     }
 
-    public Event(String name, String description, String start, String end, Location loc, String url) throws ParseException {
+    public Event(String name, String tags, String description, String start, String end, Location loc, String url) throws ParseException {
         this.name = name;
         this.description = description;
         this.campus_loc = loc;
         this.startTime = start;
         this.endTime = end;
+        this.tags = tags;
         startGC.setTime(formatter.parse(start));
         endGC.setTime(formatter.parse(end));
         setImage_url(url);
@@ -154,6 +159,14 @@ public class Event implements Parcelable{
         this.description = description;
     }
 
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
     public String getDateString(){
         SimpleDateFormat monthf = new SimpleDateFormat("MMM d");
         return monthf.format(startGC.getTime()).toUpperCase() ;
@@ -162,10 +175,10 @@ public class Event implements Parcelable{
     public String getTimeString(){
         SimpleDateFormat timef = new SimpleDateFormat("MMM d");
         if(timef.format(startGC.getTime()).equals(timef.format(endGC.getTime()))){
-            timef = new SimpleDateFormat("EEEE, MMM d 'from' h:mma");
+            timef = new SimpleDateFormat("EEEE, MMM d '\n'h:mm a '-'");
             String st = timef.format(startGC.getTime());
-            timef = new SimpleDateFormat("h:mma");
-            return st + " to " + timef.format(endGC.getTime());
+            timef = new SimpleDateFormat("h:mm a");
+            return st + " " + timef.format(endGC.getTime());
         }else{
             return timef.format(startGC.getTime()) + "-" + timef.format(endGC.getTime());
         }
@@ -208,10 +221,12 @@ public class Event implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(name);
         parcel.writeString(id);
+        parcel.writeString(tags);
         parcel.writeString(description);
         parcel.writeString(image_url);
         parcel.writeString(category);
         parcel.writeString(organization);
+        parcel.writeString(campus_loc.toString());
         parcel.writeString(startTime);
         parcel.writeString(endTime);
     }

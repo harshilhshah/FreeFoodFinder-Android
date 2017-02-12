@@ -61,7 +61,7 @@ public class Location {
     }
 
     public String toString(){
-        return this.address + " " + this.city + " " + this.state;
+        return this.address + ":" + this.city + ":" + this.state;
     }
 
 

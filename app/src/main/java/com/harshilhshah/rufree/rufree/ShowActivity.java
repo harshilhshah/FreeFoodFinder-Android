@@ -3,19 +3,20 @@ package com.harshilhshah.rufree.rufree;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.facebook.appevents.AppEventsLogger;
 import com.harshilhshah.rufree.rufree.Model.Event;
 import com.harshilhshah.rufree.rufree.Utility.EventScraper;
+import com.harshilhshah.rufree.rufree.Utility.ItemClickSupport;
 
 
- public class ShowActivity extends AppCompatActivity {
+public class ShowActivity extends AppCompatActivity {
 
     private final EventAdapter eventAdapter = new EventAdapter(this,null);
 
@@ -26,18 +27,32 @@ import com.harshilhshah.rufree.rufree.Utility.EventScraper;
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
 
-        ListView event_list = (ListView) findViewById(R.id.event_list);
-        event_list.setAdapter(eventAdapter);
-        event_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Event event = (Event) parent.getItemAtPosition(position);
-                Intent intent = new Intent(ShowActivity.this, EventDisplayActivity.class);
-                intent.putExtra("Event",event);
-                startActivity(intent);
-                eventAdapter.notifyDataSetChanged();
-            }
-        });
+         RecyclerView rvContacts = (RecyclerView) findViewById(R.id.event_list);
+        rvContacts.setAdapter(eventAdapter);
+         rvContacts.setLayoutManager(new LinearLayoutManager(this));
+
+         ItemClickSupport.addTo(rvContacts).setOnItemClickListener(
+                 new ItemClickSupport.OnItemClickListener() {
+                     @Override
+                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                         Event event = eventAdapter.getItem(position);
+                         Intent intent = new Intent(ShowActivity.this, EventDisplayActivity.class);
+                         intent.putExtra("Event",event);
+                         startActivity(intent);
+                         eventAdapter.notifyDataSetChanged();
+                     }
+                 }
+         );
+
+         /*FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab);
+         myFab.setOnClickListener(new View.OnClickListener() {
+             public void onClick(View v) {
+                 Intent i = new Intent(ShowActivity.this,CreateEventActivity.class);
+                 startActivity(i);
+                 eventAdapter.notifyDataSetChanged();
+             }
+         });*/
+
 
         new EventScraper(eventAdapter);
     }

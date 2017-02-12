@@ -7,6 +7,8 @@
     <string name="facebook_app_id">140671119617216</string>
     <string name="search">Search</string>
     <string name="user">User</string>
+    <string name="details">Description</string>
     <string name="displays_an_image_to_better_showcase_the_event">Displays an image to better showcase the event</string>
     <string name="title_activity_event_display">EventDisplayActivity</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
 </resources>

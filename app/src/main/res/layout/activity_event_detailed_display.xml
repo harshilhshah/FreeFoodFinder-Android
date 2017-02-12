@@ -1,30 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_event_detailed_display"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.harshilhshah.rufree.rufree.EventDisplayActivity">
+    android:layout_height="wrap_content"
+    tools:context="com.harshilhshah.rufree.rufree.EventDisplayActivity"
+    android:scrollbars="vertical">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/event_cover_picture"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:background="@android:color/white"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/event_time" />
+        android:id="@+id/event_name"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@android:color/white"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            app:srcCompat="@drawable/time_icon"
+            android:id="@+id/time_image"
+            android:contentDescription="@string/action_settings" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/event_time"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:lineSpacingExtra="2sp"
+            android:layout_toEndOf="@+id/time_image"
+            android:layout_toRightOf="@+id/time_image"
+            android:gravity="center_vertical" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@android:color/white"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            app:srcCompat="@drawable/location_map_pin_black5"
+            android:id="@+id/location_image"
+            android:contentDescription="@string/action_settings" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/event_location"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:lineSpacingExtra="2sp"
+            android:layout_toEndOf="@+id/location_image"
+            android:layout_toRightOf="@+id/location_image"
+            android:gravity="center_vertical" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@android:color/white"
+        >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            app:srcCompat="@drawable/tag_icon"
+            android:id="@+id/tags_image"
+            android:contentDescription="@string/action_settings" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/event_tags"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:lineSpacingExtra="2sp"
+            android:layout_toEndOf="@+id/tags_image"
+            android:layout_toRightOf="@+id/tags_image"
+            android:gravity="center_vertical" />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/event_name" />
+        android:background="@android:color/white"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="15dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="@string/details"
+        android:textStyle="normal|bold"
+        android:textAllCaps="true"/>
 
     <TextView
+        android:id="@+id/event_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/event_description" />
+        android:background="@android:color/white"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
+        android:paddingBottom="25dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:scrollHorizontally="false" />
+
 </LinearLayout>
+
+    </ScrollView>
